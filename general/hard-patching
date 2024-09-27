@@ -1,0 +1,23 @@
+---
+- name: patching of several packages
+  hosts: localhost
+  become: true
+  tasks:
+    - name: list of package to be update
+      package:
+         name: "{{ item }}"
+         state: latest
+      loop:
+        - python3
+        - grub2
+    - name: list the installed packages
+      yum:
+        name: "NetworkManager.x86_64"
+        state: latest
+      check_mode: true
+      register: yum_latest_version
+
+    - name: debug
+      debug:
+        msg: "{{ yum_latest_version }}"
+...

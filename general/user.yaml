@@ -1,0 +1,20 @@
+---
+- name: creating a user with diff authentication and parameter
+  hosts: all
+  become: true
+  tasks:
+  - user:
+      name: joe
+      comment: john dere
+      uid: 1786
+      create_home: false
+      password_expire_max: 5
+      password_expire_min: 3
+      password_expire_warn: 2
+      shell: /bin/zsh
+      state: present
+  - group:
+      name: aug24
+      state: present
+      gid: 1788
+...

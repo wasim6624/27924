@@ -1,0 +1,36 @@
+---
+- name: Creat yum repositories
+  hosts: all
+  become: true
+  tasks:
+  - name: ensure the yum repo exists baseOs
+    yum_repository:
+      file: yum
+      name: base
+      description: baseOs
+      baseurl: /run/media/worker4/RHEL-8-4-0-BaseOS-x86_64/BaseOS
+      gpgcheck: no
+      enabled: yes
+
+  - name: ensure the yum repo exists Appstrem
+    yum_repository:
+      file: yum
+      name: apps
+      description: Apps
+      baseurl: /run/media/worker4/RHEL-8-4-0-BaseOS-x86_64/AppStream
+      gpgcheck: no
+      enabled: yes
+
+  - name: gather information about pkgs
+    package_facts:
+      manager: auto
+
+  - name: Print the package facts
+    debug:
+      var: ansible_facts.packages
+
+  - name: Check whether a package called zlib is installed
+    debug:
+      msg: "{{ ansible_facts.packages['zlib'] }} versions of zlib are installed!"
+    when: "'zlib' in ansible_facts.packages"
+...

@@ -1,0 +1,29 @@
+---
+- name: file creation on multiple servers
+  hosts: all
+  become: true
+  become_method: sudo
+  become_user: root
+  tasks:
+  - file:
+      path: /home/29072024.yml
+      state: touch
+      mode: 0644
+  - file:
+      path: /home/29072024.yml
+      mode: 1644
+      owner: worker4
+      group: worker4
+    when: "ansible_default_ipv4.address == '192.168.43.137' "
+  - file:
+      path: /home/29072024.yml
+      mode: 1644
+      owner: worker2
+      group: worker2
+    when: "ansible_default_ipv4.address == '192.168.43.52' "
+  - file:
+      path: /home/29072024.yml
+      mode: 1644
+      owner: master
+      group: master
+    when: "ansible_default_ipv4.address == '192.168.43.243'"

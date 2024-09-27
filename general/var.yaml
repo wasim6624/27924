@@ -1,0 +1,4 @@
+pKg: "httpd"
+docRoot: "/var/www/01082024"
+pkgService: "httpd"
+sitePort: "81"

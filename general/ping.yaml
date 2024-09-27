@@ -1,0 +1,8 @@
+---
+- name: connectivity Test for managed nodes
+  hosts: all
+  gather_facts: false
+  tasks:
+  - ping:
+    name: connectivity test for Managed nodes
+...

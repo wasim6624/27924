@@ -1,0 +1,10 @@
+---
+- name: create a empty file
+  hosts: all
+  tasks:
+  - file:
+      path: "/home/worker4/condition.yaml"
+      state: touch
+      mode: 2660
+    when: ansible_fqdn == "Worker4.node"
+...

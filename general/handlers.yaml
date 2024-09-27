@@ -1,0 +1,14 @@
+---
+- name: "initial state"
+  hosts: localhost
+  tasks:
+  - copy:
+      src: /home/Ansible/Ansible-doc/index.html
+      dest: /home/Ansible/index.html
+    notify: H1
+
+  handlers:
+  - name: H1
+    debug:
+      msg: " this is handler"
+...

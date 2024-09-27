@@ -1,0 +1,32 @@
+all:
+  children:
+    GULF:
+      children:
+        DUBAI:
+          hosts:
+            hostname=Worker4.node:
+              ansible_host: 192.168.43.137
+              ansible_user: worker4
+              hostname: Worker4.node
+all:
+  children:
+    GULF:
+      children:
+        DUBAI:
+          hosts:
+            hostname=Worker4.node:
+              ansible_host: 192.168.43.137
+              ansible_user: worker4
+              hostname: Worker4.node
+        KUWAIT:
+          hosts:
+            hostname=Master.node:
+              ansible_host: 192.168.43.243
+              ansible_user: master
+              hostname: Master.node
+        OMAN:
+          hosts:
+            hostname=Worker2.node:
+              ansible_host: 192.168.43.52
+              ansible_user: worker2
+              hostname: Worker2.node

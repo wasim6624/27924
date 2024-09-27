@@ -1,0 +1,10 @@
+---
+- name: chaneg selinux to premissive
+  hosts: all
+  become: true
+  tasks:
+  - selinux:
+      policy: targeted
+      state: enforcing
+  - reboot: 
+...

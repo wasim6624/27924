@@ -1,0 +1,13 @@
+---
+- name: creating a cron job
+  hosts: all
+  become: true
+  tasks:
+    - cron:
+        name: clear cache
+        user: worker4
+        minute: '*'
+        hour: '*'
+        job: bash ./home/cache.sh
+...  
+        
