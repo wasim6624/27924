@@ -1,0 +1,11 @@
+---
+- name: "Remove authorised Key taken from file"
+  hosts: OMAN
+  tasks: 
+
+  - name: Delete authorised key
+    authorized_key:
+      user: worker2
+      key: " {{ lookup('file','/home/Ansible/.ssh/id_rsa.pub') }} "
+      state: absent
+...

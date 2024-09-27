@@ -1,0 +1,17 @@
+---
+- name: perform packaging in win11
+  hosts: Win2016
+  tasks:
+    - name: policy alligned
+      ansible.windows.win_powershell:
+        script: |
+          winrm get winrm/config
+          Get-Service -Name WinRM
+          winrm get winrm/config/client/auth
+          reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\full" /v version
+      register: result
+    
+    - name: printing result
+      debug:
+        msg: "{{ result }}"
+...

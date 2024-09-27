@@ -1,0 +1,43 @@
+---
+- name: install httpd package
+  hosts: all
+  become: true
+  become_method: sudo 
+  become_user: root
+  vars_files:
+    - "var.yaml"
+  tasks:
+  - name: initial state
+    debug: 
+      msg: " starting webdeployment on {{ inventory_hostname }} "
+  - package:
+      name: "{{ pKg }}"
+      state: "present"
+    register: "pkgDone"
+  - name: create document root
+    file:
+      path: "{{ docRoot }}" 
+      state: directory
+  - name: copy configuration files
+    copy: 
+      src: "/home/Ansible/Ansible-doc/webServer/http-01082024.conf"
+      dest: "/etc/httpd/conf.d/http-01082024.conf"
+  - copy: 
+      content: " This is ansible test of august24"
+      dest: "{{ docRoot }}/index.html"
+  - service:
+      name: "{{ pkgService }}"
+      state: "started"
+      enabled: " true "
+  - firewalld:
+      service: "http"
+      permanent: "true"
+      state: "enabled"
+  - firewalld:
+      port: "80/tcp"
+      permanent: "true"
+      state: "enabled"
+  - service:
+      name: "firewalld"
+      state: "restarted"
+...

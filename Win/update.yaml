@@ -1,0 +1,12 @@
+---
+- name: checking updates are availble or not in win 2016
+  hosts: Win2016
+  tasks:
+    - ansible.windows.win_updates:
+        category_names: 'NET Framework'
+        state: 'installed'
+      register: 'updates'
+    
+    - debug:
+        msg: "{{ updates }}"
+...

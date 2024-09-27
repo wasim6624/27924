@@ -1,0 +1,73 @@
+---
+- name: installing nfs-utils pkg
+  hosts: DUBAI
+  become: true
+  become_method: sudo
+  become_user: root
+  vars:
+    serv1: nfs-server.service
+    serv2: autofs.service
+    fSer: 
+      - nfs
+      - rpc-bind
+      - mountd
+    fPort: 
+      - 2049/tcp
+      - 2049/udp
+      - 111/tcp
+      - 20049/tcp
+      - 20048/tcp
+    pkg:
+      - nfs-utils
+      - autofs
+  tasks:
+  - package:
+      name: "{{ pkg }}"
+      state: present
+  - service:
+      name: "{{ serv1 }}"
+      state: started
+      enabled: yes
+  - file:
+      path: /2024-August11
+      state: directory
+      mode: 0777
+  - file:
+      path: /etc/auto.master.d/direct.autofs
+      state: touch
+      mode: 0777
+  - lineinfile:
+      path: /etc/auto.master.d/direct.autofs
+      line: "/-    /etc/auto.direct"
+  - file:
+      path: /etc/auto.direct
+      state: touch
+  - lineinfile:
+      path: /etc/auto.direct
+      line: "/2024-August11    -rw,sync,fstype=nfs4    192.168.43.52:/2024811" 
+  - firewalld:
+      zone: "public"
+      service: "nfs"
+      permanent: "true"
+      state: "enabled"
+  - firewalld:
+      zone: "public"
+      service: "rpc-bind"
+      permanent: "true"
+      state: "enabled"
+  - firewalld:
+      zone: "public"
+      service: "mountd"
+      permanent: "true"
+      state: "enabled"
+  - firewalld:
+      port: "2049/tcp"
+      permanent: "true"
+      state: "enabled"
+  - service:
+      name: "firewalld"
+      state: "restarted"
+  - service:
+      name: "{{ serv2 }}"
+      state: "restarted"
+...

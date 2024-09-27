@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: true
+  vars_files:
+  - var.yaml
+  tasks:
+   - name: print variable
+     debug:
+       msg: "{{ Port }}, {{ docRoot }} "    
+   - name: "creating Conf file for httpd"  
+     template:
+      src: "/home/Ansible/Ansible-doc/webServer/weblocal/http-01082024.conf.j2"
+      dest: "/etc/httpd/conf.d/http24.conf"
+...

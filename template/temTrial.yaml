@@ -1,0 +1,8 @@
+---
+- name: copy templating 
+  hosts: all
+  tasks:
+  - template:
+       src: "/home/Ansible/Ansible-doc/template/2493.j2"
+       dest: "/home/worker4/localSetup"
+...

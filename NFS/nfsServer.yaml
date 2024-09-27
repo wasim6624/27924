@@ -1,0 +1,38 @@
+---
+- name: installing nfs-utils pkg
+  hosts: OMAN
+  become: true
+  become_method: sudo
+  become_user: root
+  vars:
+    serv: rpc-bind
+    pkg:
+      - nfs-utils
+  tasks:
+  - package:
+      name: "{{ pkg }}"
+      state: present
+  - service:
+      name: nfs-server.service
+      state: started
+      enabled: yes
+  - file:
+      path: /2024811
+      state: directory
+      mode: 0777
+  - lineinfile:
+      path: /etc/exports
+      line: "/2024811   192.168.43.0/24(rw,sync)"
+  - firewalld:
+      zone: public
+      service: "{{serv}}"
+      permanent: "true"
+      state: "enabled"
+  - firewalld:
+      port: "2049/tcp"
+      permanent: "true"
+      state: "enabled"
+  - service:
+      name: "firewalld"
+      state: "restarted"
+...

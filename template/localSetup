@@ -1,0 +1,168 @@
+Welcome to Ansible
+-The ipv4 address is 192.168.43.138
+-The current memory usage is 818mb out of 1746mb
+-The nameserver is ['192.168.43.1', '2402:3a80:43f6:ef1e::49']
+-The ip information about nodes is {'address': '192.168.43.138', 'broadcast': '192.168.43.255', 'netmask': '255.255.255.0', 'network': '192.168.43.0', 'prefix': '24'}
+
+-Your system is live since 9442
+- User is working in /home/Ansible
+- details of user is Ansible 
+- 1000 
+- Ansible
+- /bin/zsh 
+- 1000
+
+- swap free is 1923
+- swap total mem is 2047
+- your system is Linux
+- security of selinux {'status': 'enabled', 'policyvers': 33, 'config_mode': 'permissive', 'mode': 'permissive', 'type': 'targeted'}
+
+IP of managed nodes is 192.168.43.137
+
+   192.168.43.138
+
+   server app1 192.168.43.137:81 check 
+192.168.43.242 | CHANGED | rc=0 >>
+Welcome to Control2
+-The ipv4 address is 192.168.43.242
+-The current memory usage is 1394mb out of 1790mb
+-The nameserver is ['192.168.43.1', '2402:3a80:43f6:ef1e::49']
+-The ip information about nodes is {'address': '192.168.43.242', 'broadcast': '192.168.43.255', 'netmask': '255.255.255.0', 'network': '192.168.43.0', 'prefix': '24'}
+
+-Your system is live since 145
+- User is working in /root
+- details of user is root 
+- 0 
+- root
+- /bin/bash 
+- 0
+
+- swap free is 2047
+- swap total mem is 2047
+- your system is Linux
+- security of selinux {'status': 'enabled', 'policyvers': 33, 'config_mode': 'enforcing', 'mode': 'enforcing', 'type': 'targeted'}
+
+IP of managed nodes1 is 192.168.43.137
+IP of managed nodes2 is 192.168.43.242
+IP of managed nodes3 is 192.168.43.52
+IP of managed nodes4 is 192.168.43.243
+
+   192.168.43.242
+   192.168.43.242
+   192.168.43.242
+   192.168.43.242
+
+   server app1 192.168.43.137:81 check 
+   server app2 192.168.43.242:81 check 
+   server app3 192.168.43.52:81 check 
+   server app4 192.168.43.243:81 check 
+192.168.43.137 | CHANGED | rc=0 >>
+Welcome to Worker4
+-The ipv4 address is 192.168.43.137
+-The current memory usage is 1260mb out of 1790mb
+-The nameserver is ['192.168.43.1', '2402:3a80:43f6:ef1e::49']
+-The ip information about nodes is {'address': '192.168.43.137', 'broadcast': '192.168.43.255', 'netmask': '255.255.255.0', 'network': '192.168.43.0', 'prefix': '24'}
+
+-Your system is live since 1606
+- User is working in /root
+- details of user is root 
+- 0 
+- root
+- /bin/bash 
+- 0
+
+- swap free is 2033
+- swap total mem is 2047
+- your system is Linux
+- security of selinux {'status': 'enabled', 'policyvers': 33, 'config_mode': 'enforcing', 'mode': 'enforcing', 'type': 'targeted'}
+
+IP of managed nodes1 is 192.168.43.137
+IP of managed nodes2 is 192.168.43.242
+IP of managed nodes3 is 192.168.43.52
+IP of managed nodes4 is 192.168.43.243
+
+   192.168.43.137
+   192.168.43.137
+   192.168.43.137
+   192.168.43.137
+
+   server app1 192.168.43.137:81 check 
+   server app2 192.168.43.242:81 check 
+   server app3 192.168.43.52:81 check 
+   server app4 192.168.43.243:81 check 
+192.168.43.52 | CHANGED | rc=0 >>
+Welcome to Worker2
+-The ipv4 address is 192.168.43.52
+-The current memory usage is 1184mb out of 1790mb
+-The nameserver is ['192.168.43.1', '2402:3a80:43f6:ef1e::49']
+-The ip information about nodes is {'address': '192.168.43.52', 'broadcast': '192.168.43.255', 'netmask': '255.255.255.0', 'network': '192.168.43.0', 'prefix': '24'}
+
+-Your system is live since 136
+- User is working in /root
+- details of user is root 
+- 0 
+- root
+- /bin/bash 
+- 0
+
+- swap free is 2047
+- swap total mem is 2047
+- your system is Linux
+- security of selinux {'status': 'disabled'}
+
+IP of managed nodes1 is 192.168.43.137
+IP of managed nodes2 is 192.168.43.242
+IP of managed nodes3 is 192.168.43.52
+IP of managed nodes4 is 192.168.43.243
+
+   192.168.43.52
+   192.168.43.52
+   192.168.43.52
+   192.168.43.52
+
+   server app1 192.168.43.137:81 check 
+   server app2 192.168.43.242:81 check 
+   server app3 192.168.43.52:81 check 
+   server app4 192.168.43.243:81 check 
+192.168.43.243 | CHANGED | rc=0 >>
+Welcome to Master
+-The ipv4 address is 192.168.43.243
+-The current memory usage is 1194mb out of 1746mb
+-The nameserver is ['192.168.43.1', '2402:3a80:43f6:ef1e::49']
+-The ip information about nodes is {'address': '192.168.43.243', 'broadcast': '192.168.43.255', 'netmask': '255.255.255.0', 'network': '192.168.43.0', 'prefix': '24'}
+
+-Your system is live since 142
+- User is working in /root
+- details of user is root 
+- 0 
+- root
+- /bin/bash 
+- 0
+
+- swap free is 2047
+- swap total mem is 2047
+- your system is Linux
+- security of selinux {'status': 'enabled', 'policyvers': 33, 'config_mode': 'enforcing', 'mode': 'enforcing', 'type': 'targeted'}
+
+IP of managed nodes1 is 192.168.43.137
+IP of managed nodes2 is 192.168.43.242
+IP of managed nodes3 is 192.168.43.52
+IP of managed nodes4 is 192.168.43.243
+
+   192.168.43.243
+   192.168.43.243
+   192.168.43.243
+   192.168.43.243
+
+   server app1 192.168.43.137:81 check 
+   server app2 192.168.43.242:81 check 
+   server app3 192.168.43.52:81 check 
+   server app4 192.168.43.243:81 check 
+
+
+
+
+
+
+
+app{{ loop.index }} generates a label with app followed by the current iteration number.

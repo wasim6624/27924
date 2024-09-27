@@ -1,0 +1,71 @@
+---
+- name: Creating a directory on DUBAI
+  hosts: DUBAI
+  tasks:
+  - file: 
+      path: "~/.ssh/"
+      state: directory
+      owner: worker4
+      group: worker4
+      mode: 0700
+
+- name: Creating a directory on KUWAIT
+  hosts: KUWAIT
+  tasks:
+  - file:
+      path: "~/.ssh/"
+      state: directory
+      owner: master
+      group: master
+      mode: 0700
+
+- name: Creating a directory on OMAN
+  hosts: OMAN
+  tasks:
+  - file:
+      path: "~/.ssh/"
+      state: directory
+      owner: worker2
+      group: worker2
+      mode: 0700
+
+- name: copy id_rsa.pub content to authorised_keys
+  hosts: all
+  tasks:
+  - copy:
+      content: "{{ lookup ('file' , '/home/Ansible/.ssh/id_rsa.pub') }}"
+      dest: "~/.ssh/authorized_keys"
+      mode: "0600"
+- name: priviledge escalation
+  hosts: all
+  become: true
+  become_method: sudo 
+  become_user: root
+  tasks:
+  - name: disable password authentication
+    lineinfile:
+      path: "/etc/ssh/sshd_config"
+      regexp: 'passwordAuthentication yes'
+      line: 'PasswordAuthentication no'
+    notify: H1
+
+  - name: disable root authentication in ssh 
+    lineinfile:
+      path: "/etc/ssh/sshd_config"
+      regexp: '^(.*)PermitRootLogin(.*)$'
+      line: 'PermitRootLogin no'
+    notify: H1
+
+  - name: Enable pubKey authentication in ssh
+    lineinfile:
+      path: "/etc/ssh/sshd_config"
+      regexp: '^(.*)PubkeyAuthentication(.*)$'
+      line: 'PubkeyAuthentication yes'
+    notify: H1
+    
+  handlers:
+  - name: h1
+    service:
+      name: sshd.service
+      state: restarted
+...

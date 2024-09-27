@@ -1,0 +1,34 @@
+Welcome to {{ ansible_hostname }}
+-The ipv4 address is {{ ansible_default_ipv4['address']}}
+- the fqdn is {{ansible_fqdn}}
+-The current memory usage is {{ ansible_memory_mb['real']['used']}}mb out of {{ ansible_memory_mb['real']['total']}}mb
+-The nameserver is {{ ansible_dns[ 'nameservers' ] }}
+-The ip information about nodes is {{ ansible_ens160['ipv4'] }}
+
+-Your system is live since {{ ansible_uptime_seconds }}
+- User is working in {{ ansible_user_dir }}
+- details of user is {{ ansible_user_gecos }} 
+- {{ ansible_user_gid }} 
+- {{ ansible_user_id }}
+- {{ ansible_user_shell }} 
+- {{ ansible_user_uid }}
+
+- swap free is {{ ansible_swapfree_mb }}
+- swap total mem is {{ ansible_swaptotal_mb }}
+- your system is {{ ansible_system }}
+- security of selinux {{ ansible_selinux}}
+
+{% for ip in groups['GULF'] %}
+IP of managed nodes{{ loop.index }} is {{ ip }}
+{% endfor %}
+
+{% for host in groups['GULF'] %}
+   {{ ansible_default_ipv4['address'] }}
+{% endfor %}
+
+{% for ip in groups['GULF'] %}
+   server app{{ loop.index }} {{ ip }}:81 check 
+{% endfor %}
+
+
+{{ ansible_fibre_channel_wwn }}

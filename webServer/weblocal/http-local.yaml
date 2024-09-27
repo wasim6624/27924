@@ -1,0 +1,42 @@
+---
+- name: install httpd package
+  hosts: localhost
+  become: true
+  become_method: sudo
+  become_user: root
+  vars_files:
+    - "var.yaml"
+  tasks:
+
+  - name: "initial state"
+    debug: 
+      msg: " starting webdeployment on {{ inventory_hostname }} "
+
+  - package:
+      name: "{{ pkg }}"
+      state: "present"
+    register: "pkgDone"
+
+  - name: "creating document root"
+    file:
+      path: "{{ docRoot }}"
+      state: directory
+
+  - name: "creating Conf file for httpd"  
+    template:
+      src: "/home/Ansible/Ansible-doc/webServer/weblocal/http-01082024.conf.j2"
+      dest: "/etc/httpd/conf.d/http-01082024.conf"
+
+  - name: " deploymnet of web Content on docRoot "
+    template:
+      src: "/home/Ansible/Ansible-doc/webServer/weblocal/index.html.j2"
+      dest: "{{ docRoot }}/index.html"
+      #notify: "webService start"
+
+  handlers:
+  - name: "webService start"
+    service:
+      name: "{{ pkgService }}" 
+      state: "started"
+      enabled: " true "
+...

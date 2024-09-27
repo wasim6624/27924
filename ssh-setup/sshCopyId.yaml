@@ -1,0 +1,9 @@
+---
+- hosts: all
+  name: copy ssh-copy-id
+  tasks:
+    authorized_key:
+      user: worker4
+      state: present
+      key: "{{ lookup('file','/home/Ansible/.ssh/id_rsa.pub') }}"
+...

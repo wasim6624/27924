@@ -1,0 +1,12 @@
+---
+- name: metrics
+  hosts: all
+  tasks:
+  - name: "initial state"
+    debug: 
+      msg: " starting webdeployment on {{ inventory_hostname }} "
+  - name: templating
+    template:
+      src: /home/Ansible/Ansible-doc/webServer/weblocal/index.html.j2
+      dest: /home/worker4/index.html
+...

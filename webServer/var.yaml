@@ -1,0 +1,4 @@
+docRoot: "/var/www/14824"
+pkgService: "httpd"
+Port: "81"
+pkg: "httpd"                                                                                                                                                       

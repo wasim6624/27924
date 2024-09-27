@@ -1,0 +1,59 @@
+---
+- name: install httpd package
+  hosts: all
+  become: true
+  vars_files:
+  - var.yaml
+
+  tasks:
+  - name: Disable SELinux
+    selinux:
+      state: "disabled"
+  - name: initial state
+    debug: 
+      msg: " starting webdeployment on {{ inventory_hostname }} "
+
+  - name: installing httpd package
+    package:
+      name: "{{ pkg }}"
+      state: "present"
+    register: "pkgDone"
+
+  - debug:
+      msg: "{{ pkg | upper }}"
+
+  - name: create document root
+    file:
+      path: "{{ docRoot }}" 
+      state: directory
+
+  - name: create httpd config file with jinjs j2 format
+    template: 
+      src: "/home/Ansible/Ansible-doc/webServer/http-81424.conf.j2"
+      dest: "/etc/httpd/conf.d/http81.conf"
+    notify: "H1"
+
+  - name: 
+    template:
+      src: "/home/Ansible/Ansible-doc/webServer/index.html.j2"
+      dest: "{{ docRoot }}/index.html"
+ 
+  handlers:
+  - name: "H1"
+    service:
+      name: "{{ pkgService }}"
+      state: "started"
+      enabled: " true "
+
+  - firewalld:
+      service: "http"
+      permanent: "true"
+      state: "enabled"
+  - firewalld:
+      port: "80/tcp"
+      permanent: "true"
+      state: "enabled"
+  - service:
+      name: "firewalld"
+      state: "restarted"
+...
